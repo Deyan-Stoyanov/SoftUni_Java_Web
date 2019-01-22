@@ -7,26 +7,19 @@ public class HttpRequestImpl implements HttpRequest {
 
     private String method;
     private String requestUrl;
-    private String httpVersion;
     private Map<String, String> headers;
     private Map<String, String> bodyParameters;
 
     public HttpRequestImpl(String request) {
-        this.parseRequestLineData(request);
         this.headers = new LinkedHashMap<>();
         this.bodyParameters = new LinkedHashMap<>();
+        this.parseData(request);
+    }
+
+    private void parseData(String request) {
+        this.parseRequestLineData(request);
         this.parseHeaders(request);
         this.parseBodyParameters(request);
-    }
-
-    @Override
-    public Map<String, String> getHeaders() {
-        return this.headers;
-    }
-
-    @Override
-    public Map<String, String> getBodyParameters() {
-        return this.bodyParameters;
     }
 
     @Override
@@ -50,16 +43,6 @@ public class HttpRequestImpl implements HttpRequest {
     }
 
     @Override
-    public String getHttpVersion() {
-        return this.httpVersion;
-    }
-
-    @Override
-    public void setHttpVersion(String httpVersion) {
-        this.httpVersion = httpVersion;
-    }
-
-    @Override
     public void addHeader(String header, String value) {
         this.headers.put(header, value);
     }
@@ -70,19 +53,24 @@ public class HttpRequestImpl implements HttpRequest {
     }
 
     @Override
+    public Map<String, String> getHeaders() {
+        return this.headers;
+    }
+
+    @Override
+    public Map<String, String> getBodyParameters() {
+        return this.bodyParameters;
+    }
+
+    @Override
     public boolean isResource() {
         return !this.requestUrl.contains(".");
     }
 
     private void parseRequestLineData(String request) {
-        String[] tokens = request.split("\r\n");
-        String[] requestLine = tokens[0].split("\\s+");
-        String method = requestLine[0];
-        String url = requestLine[1];
-        String httpVersion = requestLine[2];
-        this.setMethod(method);
-        this.setRequestUrl(url);
-        this.setHttpVersion(httpVersion);
+        String[] requestLine = request.split("\r\n")[0].split("\\s+");
+        this.setMethod(requestLine[0]);
+        this.setRequestUrl(requestLine[1]);
     }
 
     private void parseBodyParameters(String request) {

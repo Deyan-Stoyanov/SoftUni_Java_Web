@@ -15,10 +15,6 @@ public interface HttpRequest {
 
     void setRequestUrl(String requestUrl);
 
-    String getHttpVersion();
-
-    void setHttpVersion(String httpVersion);
-
     void addHeader(String header, String value);
 
     void addBodyParameter(String parameter, String value);

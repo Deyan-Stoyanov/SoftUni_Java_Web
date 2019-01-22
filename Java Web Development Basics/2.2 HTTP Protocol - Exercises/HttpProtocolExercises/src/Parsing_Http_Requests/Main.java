@@ -3,10 +3,8 @@ package Parsing_Http_Requests;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -57,10 +55,15 @@ public class Main {
         sb.append(httpVersion)
                 .append(" ")
                 .append(responseCode)
-                .append(System.lineSeparator())
-                .append(requestHeaders.stream()
-                        .filter(x -> x.startsWith("Date") || x.startsWith("Host") || x.startsWith("Content-Type"))
-                        .collect(Collectors.joining(System.lineSeparator())))
+                .append(System.lineSeparator());
+        if (requestHeaders.stream().noneMatch(x -> x.startsWith("Date"))) {
+            sb.append("Date: ")
+                    .append(new SimpleDateFormat("dd/MM/yyyy").format(new Date()))
+                    .append(System.lineSeparator());
+        }
+        sb.append(requestHeaders.stream()
+                .filter(x -> x.startsWith("Date") || x.startsWith("Host") || x.startsWith("Content-Type"))
+                .collect(Collectors.joining(System.lineSeparator())))
                 .append(System.lineSeparator())
                 .append(System.lineSeparator())
                 .append(responseMessage);

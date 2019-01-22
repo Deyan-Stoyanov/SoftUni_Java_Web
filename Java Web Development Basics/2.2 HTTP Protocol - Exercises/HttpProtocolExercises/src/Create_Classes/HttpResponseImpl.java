@@ -1,9 +1,7 @@
 package Create_Classes;
 
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class HttpResponseImpl implements HttpResponse {
@@ -19,13 +17,13 @@ public class HttpResponseImpl implements HttpResponse {
     private int statusCode;
     private byte[] content;
 
-    public HttpResponseImpl(HttpRequest request) {
-        this.checkStatus(request);
+    public HttpResponseImpl(HttpRequest request, List<String> validUrls) {
+        this.checkStatus(request, validUrls);
         this.headers = new LinkedHashMap<>(request.getHeaders());
     }
 
-    private void checkStatus(HttpRequest request) {
-        if (!request.isResource()) {
+    private void checkStatus(HttpRequest request, List<String> validUrls) {
+        if (!validUrls.contains(request.getRequestUrl())) {
             this.setStatusCode(404);
             this.setContent("The requested functionality was not found.".getBytes());
         } else if (request.getHeaders().keySet().stream().noneMatch(x -> x.equals("Authorization"))) {
@@ -36,8 +34,18 @@ public class HttpResponseImpl implements HttpResponse {
             this.setContent("There was an error with the requested functionality due to malformed request.".getBytes());
         } else {
             this.setStatusCode(200);
-            this.setContent(String.format("Greetings %s!", request.getBodyParameters().get("username")).getBytes());
+            String username = this.decodeUsername(request.getHeaders());
+            List<String> parametersAsString = new ArrayList<>();
+            for (String key : request.getBodyParameters().keySet().stream().skip(1).collect(Collectors.toList())) {
+                parametersAsString.add(key + " - " + request.getBodyParameters().get(key));
+            }
+            this.setContent(String.format("Greetings %s! You have successfully created %s with %s.", username, request.getBodyParameters().get("name"), String.join(", ", parametersAsString)).getBytes());
         }
+    }
+
+    private String decodeUsername(Map<String, String> headers) {
+        String encodedUsername = headers.get("Authorization").split("\\s+")[1];
+        return new String(Base64.getDecoder().decode(encodedUsername));
     }
 
     @Override
@@ -83,11 +91,16 @@ public class HttpResponseImpl implements HttpResponse {
                 .append(this.getStatusCode())
                 .append(" ")
                 .append(STATUS_CODES_AND_STATUS_PHRASES.get(this.getStatusCode()))
-                .append(System.lineSeparator())
-                .append(this.getHeaders().entrySet().stream()
-                        .filter(x -> x.getKey().equals("Date") || x.getKey().equals("Host") || x.getKey().equals("Content-Type"))
-                        .map(x -> x.getKey() + ": " + x.getValue())
-                        .collect(Collectors.joining(System.lineSeparator())))
+                .append(System.lineSeparator());
+        if (this.getHeaders().keySet().stream().noneMatch(x -> x.equals("Date"))) {
+            sb.append("Date: ")
+                    .append(new SimpleDateFormat("dd/MM/yyyy").format(new Date()))
+                    .append(System.lineSeparator());
+        }
+        sb.append(this.getHeaders().entrySet().stream()
+                .filter(x -> x.getKey().equals("Date") || x.getKey().equals("Host") || x.getKey().equals("Content-Type"))
+                .map(x -> x.getKey() + ": " + x.getValue())
+                .collect(Collectors.joining(System.lineSeparator())))
                 .append(System.lineSeparator())
                 .append(System.lineSeparator())
                 .append(new String(this.getContent()));
