@@ -1,4 +1,4 @@
-package fdmc.web.servlets;
+package fdmc.servlets;
 
 import fdmc.entities.Cat;
 import fdmc.util.HtmlReader;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @WebServlet("/cats/all")
 public class CatAllServlet extends HttpServlet {
 
-    private static final String ALL_CATS_HTML_FILE = "D:\\Програмиране\\СофтУни\\Java Web\\SoftUni_Java_Web\\Java Web Development Basics\\4.2 Introduction to Java EE - Exercises\\IntroToJavaEE_Exercises\\src\\main\\resources\\views\\all-cats.html";
+    private static final String ALL_CATS_HTML_FILE = "D:\\Програмиране\\СофтУни\\Java Web\\SoftUni_Java_Web\\Java Web Development Basics\\4.2 Introduction to Java EE - Exercises\\IntroToJavaEE_Exercises\\src\\main\\resources\\all-cats.html";
     private final HtmlReader reader;
 
     @Inject
@@ -27,15 +27,15 @@ public class CatAllServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String html = this.reader.readHtmlFle(ALL_CATS_HTML_FILE);
+        String html = this.reader.readHtmlFile(ALL_CATS_HTML_FILE);
         if (req.getSession().getAttribute("cats") == null) {
             html = html
-                    .replace("{{allCats}}", "<h2>There are no cats. <a href=\"/cats/create\">Create some!</a></h2>");
+                    .replace("{{allCats}}", "<h2>There are no cats. <a href=\"create\">Create some!</a></h2>");
         } else {
             List<Cat> cats = new ArrayList<>(((Map<String, Cat>) req.getSession().getAttribute("cats")).values());
             html = html
                     .replace("{{allCats}}", cats.stream()
-                            .map(x -> String.format("<h4><a href=\"cats/profile?name=%s\">%s</a></h4>",
+                            .map(x -> String.format("<h4><a href=\"profile?name=%s\">%s</a></h4>",
                                     x.getName(), x.getName())).collect(Collectors.joining("<br/>")));
         }
         resp.getWriter().println(html);

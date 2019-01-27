@@ -1,4 +1,4 @@
-package fdmc.web.servlets;
+package fdmc.servlets;
 
 import fdmc.entities.Cat;
 import fdmc.util.HtmlReader;
@@ -14,8 +14,8 @@ import java.util.Map;
 
 @WebServlet("/cats/profile")
 public class CatProfileServlet extends HttpServlet {
-    private static final String CAT_PROFILE_HTML_FILE_PATH = "D:\\Програмиране\\СофтУни\\Java Web\\SoftUni_Java_Web\\Java Web Development Basics\\4.2 Introduction to Java EE - Exercises\\IntroToJavaEE_Exercises\\src\\main\\resources\\views\\cat-profile.html";
-    private static final String NOT_FOUND_HTML_FILE_PATH = "D:\\Програмиране\\СофтУни\\Java Web\\SoftUni_Java_Web\\Java Web Development Basics\\4.2 Introduction to Java EE - Exercises\\IntroToJavaEE_Exercises\\src\\main\\resources\\views\\non-existent-cat.html";
+    private static final String CAT_PROFILE_HTML_FILE_PATH = "D:\\Програмиране\\СофтУни\\Java Web\\SoftUni_Java_Web\\Java Web Development Basics\\4.2 Introduction to Java EE - Exercises\\IntroToJavaEE_Exercises\\src\\main\\resources\\cat-profile.html";
+    private static final String NOT_FOUND_HTML_FILE_PATH = "D:\\Програмиране\\СофтУни\\Java Web\\SoftUni_Java_Web\\Java Web Development Basics\\4.2 Introduction to Java EE - Exercises\\IntroToJavaEE_Exercises\\src\\main\\resources\\non-existent-cat.html";
     private final HtmlReader reader;
 
     @Inject
@@ -28,10 +28,10 @@ public class CatProfileServlet extends HttpServlet {
         Cat cat = ((Map<String, Cat>) req.getSession().getAttribute("cats")).get(req.getQueryString().split("=")[1]);
         String html;
         if (cat == null) {
-            html = this.reader.readHtmlFle(NOT_FOUND_HTML_FILE_PATH)
+            html = this.reader.readHtmlFile(NOT_FOUND_HTML_FILE_PATH)
                     .replace("{{name}}", req.getQueryString().split("=")[1]);
         } else {
-            html = this.reader.readHtmlFle(CAT_PROFILE_HTML_FILE_PATH)
+            html = this.reader.readHtmlFile(CAT_PROFILE_HTML_FILE_PATH)
                     .replace("{{name}}", cat.getName())
                     .replace("{{breed}}", cat.getBreed())
                     .replace("{{color}}", cat.getColor())

@@ -1,4 +1,4 @@
-package fdmc.web.servlets;
+package fdmc.servlets;
 
 import fdmc.entities.Cat;
 import fdmc.util.HtmlReader;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 @WebServlet("/cats/create")
 public class CreateServlet extends HttpServlet {
-    private static final String CREATE_CATS_HTML_FILE_PATH = "D:\\Програмиране\\СофтУни\\Java Web\\SoftUni_Java_Web\\Java Web Development Basics\\4.2 Introduction to Java EE - Exercises\\IntroToJavaEE_Exercises\\src\\main\\resources\\views\\create.html";
+    private static final String CREATE_CATS_HTML_FILE_PATH = "D:\\Програмиране\\СофтУни\\Java Web\\SoftUni_Java_Web\\Java Web Development Basics\\4.2 Introduction to Java EE - Exercises\\IntroToJavaEE_Exercises\\src\\main\\resources\\create.html";
     private final HtmlReader reader;
 
     @Inject
@@ -27,7 +27,7 @@ public class CreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter writer = resp.getWriter();
-        writer.println(this.reader.readHtmlFle(CREATE_CATS_HTML_FILE_PATH));
+        writer.println(this.reader.readHtmlFile(CREATE_CATS_HTML_FILE_PATH));
         writer.close();
     }
 
