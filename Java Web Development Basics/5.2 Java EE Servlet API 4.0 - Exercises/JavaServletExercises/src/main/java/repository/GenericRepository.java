@@ -1,7 +1,5 @@
 package repository;
 
-import domain.entities.Product;
-
 import java.util.List;
 
 public interface GenericRepository<E, K> {
@@ -10,6 +8,4 @@ public interface GenericRepository<E, K> {
     E findById(K id);
 
     List<E> findAll();
-
-    Product findByName(String name);
 }
