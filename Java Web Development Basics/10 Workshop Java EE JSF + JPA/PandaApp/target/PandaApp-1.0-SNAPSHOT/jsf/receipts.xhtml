@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="templates/base-layout.xhtml">
+    <ui:define name="main-content">
+        <h1 class="text-center">My Receipts</h1>
+        <hr class="hr-2 bg-panda"/>
+        <div class="d-flex justify-content-between">
+            <h:dataTable styleClass="table table-hover table-bordered" value="#{receiptsListBean.receipts}"
+                         var="receipt">
+                <h:column>
+                    <f:facet name="header">Id</f:facet>
+                    #{receipt.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fee</f:facet>
+                    #{receipt.fee}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Issued On</f:facet>
+                    <h:outputLabel value="#{receipt.issuedOn}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputLabel>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Recipient</f:facet>
+                    #{receipt.recipient.username}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Actions</f:facet>
+                    <h:form>
+                        <h:link outcome="details-receipt" value="Details" styleClass="btn bg-panda text-white">
+                            <f:param name="id" value="#{receipt.id}"/>
+                        </h:link>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

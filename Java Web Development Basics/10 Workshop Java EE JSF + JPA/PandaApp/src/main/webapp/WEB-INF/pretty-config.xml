@@ -1,0 +1,60 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+    <url-mapping id="index">
+        <pattern value="/"/>
+        <view-id value="/faces/jsf/index.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="home">
+        <pattern value="/home"/>
+        <view-id value="/faces/jsf/home.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="login">
+        <pattern value="/login"/>
+        <view-id value="/faces/jsf/login.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="register">
+        <pattern value="/register"/>
+        <view-id value="/faces/jsf/register.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="packages-details">
+        <pattern value="/packages/details/#{id}"/>
+        <view-id value="/faces/jsf/details-package.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="receipts">
+        <pattern value="/receipts"/>
+        <view-id value="/faces/jsf/receipts.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="receipts-details">
+        <pattern value="/receipts/details#{id}"/>
+        <view-id value="/faces/jsf/details-receipt.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="packages-create">
+        <pattern value="/packages/create"/>
+        <view-id value="/faces/jsf/create-package.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="packages-pending">
+        <pattern value="/packages/pending"/>
+        <view-id value="/faces/jsf/pending.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="packages-shipped">
+        <pattern value="/packages/shipped"/>
+        <view-id value="/faces/jsf/shipped.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="packages-delivered">
+        <pattern value="/packages/delivered"/>
+        <view-id value="/faces/jsf/delivered.xhtml"/>
+    </url-mapping>
+</pretty-config>

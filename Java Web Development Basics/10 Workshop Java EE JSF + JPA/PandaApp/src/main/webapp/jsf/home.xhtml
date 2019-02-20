@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="templates/base-layout.xhtml">
+    <ui:define name="main-content">
+        <c:choose>
+            <c:when test="#{request.getSession().getAttribute('admin') == true}">
+                <h1 class="text-center">Hello, Administrator #{request.getSession().getAttribute("username")}!</h1>
+            </c:when>
+            <c:otherwise>
+                <h1 class="text-center">Hello, #{request.getSession().getAttribute("username")}!</h1>
+            </c:otherwise>
+        </c:choose>
+        <hr class="hr-2 bg-panda"/>
+        <div class="d-flex justify-content-between">
+            <div class="w-25 bg-white">
+                <h2 class="text-center">Pending</h2>
+                <div class="border-panda p-3">
+                    <c:forEach var="pack" items="#{listPackagesBean.pendingPackages}">
+                        <div class="p-2 d-flex justify-content-around">
+                            <h4 class="w-75">#{pack.description}</h4>
+                            <h:link outcome="details-package" styleClass="btn bg-panda text-white w-25"
+                                    value="Details">
+                                <f:param name="id" value="#{pack.id}"/>
+                            </h:link>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+            <div class="w-25 bg-white">
+                <h2 class="text-center">Shipped</h2>
+                <div class="border-panda p-3">
+                    <c:forEach var="pack" items="#{listPackagesBean.shippedPackages}">
+                        <div class="p-2 d-flex justify-content-around">
+                            <h4 class="w-75">#{pack.description}</h4>
+                            <h:link outcome="details-package" styleClass="btn bg-panda text-white w-25"
+                                    value="Details">
+                                <f:param name="id" value="#{pack.id}"/>
+                            </h:link>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+            <div class="w-25 bg-white">
+                <h2 class="text-center">Delivered</h2>
+                <div class="border-panda p-3">
+                    <c:forEach var="pack" items="#{listPackagesBean.deliveredPackages}">
+                        <div class="p-2 d-flex justify-content-around">
+                            <h4 class="w-75">#{pack.description}</h4>
+                            <h:form>
+                                <h:commandLink value="Acquire" styleClass="btn bg-panda text-white"
+                                               action="#{packageManageBean.acquire(pack.id)}">
+                                    <f:param name="id" value="#{pack.id}"/>
+                                </h:commandLink>
+                            </h:form>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>
