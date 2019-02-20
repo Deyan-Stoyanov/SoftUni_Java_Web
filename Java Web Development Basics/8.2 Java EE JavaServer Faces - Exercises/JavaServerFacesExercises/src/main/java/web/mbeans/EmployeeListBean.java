@@ -67,6 +67,9 @@ public class EmployeeListBean {
     }
 
     public BigDecimal getAverageSalary() {
+        if(this.employees.isEmpty()){
+            return BigDecimal.valueOf(0);
+        }
         return this.getTotalMoneyNeeded().divide(new BigDecimal(this.employees.size()), 2, RoundingMode.CEILING);
     }
 }
