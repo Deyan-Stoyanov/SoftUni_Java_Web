@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="templates/base-layout.xhtml">
+    <ui:define name="main-content">
+        <hr class="my-3"/>
+        <h1 class="text-center">Add Job</h1>
+        <hr class="hr-3"/>
+        <h:form styleClass="mx-auto w-15">
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <h:outputLabel for="sector" styleClass="h3 mb-2" value="Sector"/>
+                </div>
+                <h:inputText styleClass="form-control" id="sector" name="sector"
+                             value="#{jobApplicationCreateBean.jobApplicationCreateBindingModel.sector}"/>
+            </div>
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <h:outputLabel for="profession" styleClass="h3 mb-2" value="Profession"/>
+                </div>
+                <h:inputText styleClass="form-control" id="profession" name="profession"
+                             value="#{jobApplicationCreateBean.jobApplicationCreateBindingModel.profession}"/>
+            </div>
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <h:outputLabel for="salary" styleClass="h3 mb-2" value="Salary"/>
+                </div>
+                <p:inputNumber styleClass="form-control" id="salary" name="salary" decimalPlaces="2"
+                               value="#{jobApplicationCreateBean.jobApplicationCreateBindingModel.salary}"/>
+            </div>
+            <div class="form-group">
+                <div class="label-holder d-flex justify-content-center">
+                    <h:outputLabel for="description" styleClass="h3 mb-2" value="Description"/>
+                </div>
+                <h:inputTextarea rows="4" styleClass="form-control" id="description" name="description"
+                                 value="#{jobApplicationCreateBean.jobApplicationCreateBindingModel.description}"/>
+            </div>
+            <div class="button-holder d-flex justify-content-center">
+                <h:commandButton action="#{jobApplicationCreateBean.register}" styleClass="btn btn-info text-white"
+                                 value="Add Job"/>
+            </div>
+        </h:form>
+        <hr class="my-3"/>
+    </ui:define>
+</ui:composition>
+
+</html>
