@@ -50,12 +50,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean login(String username, String password) {
-        try {
-            UserServiceModel userServiceModel = this.findByUsername(username);
-            return userServiceModel.getPassword().equals(DigestUtils.sha256Hex(password));
-        } catch (Exception nre) {
-            return false;
-        }
+        UserServiceModel userServiceModel = this.findByUsername(username);
+        return userServiceModel != null && userServiceModel.getPassword().equals(DigestUtils.sha256Hex(password));
     }
 
     @Override
