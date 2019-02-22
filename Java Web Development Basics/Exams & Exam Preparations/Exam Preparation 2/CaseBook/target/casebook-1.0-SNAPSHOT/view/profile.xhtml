@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="templates/base-layout.xhtml">
+    <ui:define name="main-content">
+        <hr class="my-2"/>
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6 d-flex flex-column">
+                    <h:graphicImage
+                            value="/resources/casebook-lib/img/#{userProfileBean.userViewModel.gender.toString().toLowerCase()}.png"
+                            styleClass="mx-auto img-thumbnail" width="200" height="200"/>
+                    <h4 class="mx-auto mt-3">#{userProfileBean.userViewModel.username}</h4>
+                    <h5 class="mx-auto mt-3">#{userProfileBean.userViewModel.gender}</h5>
+                </div>
+            </div>
+        </div>
+        <hr class="my-3"/>
+    </ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:component>
+    <h:form>
+        <nav class="navbar navbar-expand-lg navbar-light bg-casebook">
+            <h:commandLink styleClass="navbar-brand text-muted h4" action="/" value="Casebook"/>
+            <h:commandButton styleClass="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"/>
+            </h:commandButton>
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+                <ul class="navbar-nav row">
+                    <li class="nav-item col-md-4">
+                        <h:commandLink action="/view/home" styleClass="nav-link text-muted active h5" value="Home"/>
+                    </li>
+                    <c:choose>
+                        <c:when test="#{request.getSession().getAttribute('username') == null}">
+                            <li class="nav-item col-md-4">
+                                <h:commandLink action="/view/login" styleClass="nav-link text-muted active h5" value="Login"/>
+                            </li>
+                            <li class="nav-item col-md-4">
+                                <h:commandLink action="/view/register" styleClass="nav-link text-muted active h5"
+                                               value="Register"/>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="nav-item col-md-4">
+                                <h:commandLink action="/view/friends" styleClass="nav-link text-muted active h5"
+                                               value="Friends"/>
+                            </li>
+                            <li class="nav-item col-md-4">
+                                <h:commandLink action="#{userLogoutBean.logout}" styleClass="nav-link text-muted active h5"
+                                               value="Logout"/>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+            </div>
+        </nav>
+    </h:form>
+</ui:component>
+</html>

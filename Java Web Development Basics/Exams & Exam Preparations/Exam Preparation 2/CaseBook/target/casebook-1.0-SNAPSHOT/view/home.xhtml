@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="templates/base-layout.xhtml">
+    <ui:define name="main-content">
+        <hr class="my-2"/>
+        <div class="text-center mt-3">
+            <h:link outcome="/view/profile" styleClass="h4 text-info"
+                    value="Welcome, #{request.getSession().getAttribute('username')}">
+                <f:param name="username" value="#{request.getSession().getAttribute('username')}"/>
+            </h:link>
+        </div>
+        <hr class="my-4"/>
+        <div class="container">
+            <ui:repeat value="#{userListBean.userListViewModels}" var="person" varStatus="status">
+                <h:outputText value="&lt;div class='row mb-4 d-flex justify-content-around'&gt;" escape="false"
+                              rendered="#{status.index % 3 == 0}"/>
+                <div class="col-md-2 d-flex flex-column text-center">
+                    <h:graphicImage value="/resources/casebook-lib/img/#{person.gender.toString().toLowerCase()}.png"
+                                    styleClass="img-thumbnail" width="200" height="200"/>
+                    <h5 class="text-center">#{person.username}</h5>
+                    <h:form>
+                        <h:commandLink action="#{userListBean.addFriend(person.id)}" styleClass="btn btn-info"
+                                       value="Add Friend">
+                            <f:param name="id" value="#{person.id}"/>
+                        </h:commandLink>
+                    </h:form>
+                </div>
+                <h:outputText value="&lt;/div&gt;" escape="false" rendered="#{status.index % 3 == 2}"/>
+            </ui:repeat>
+            <h:outputText value="&lt;/div&gt;" escape="false"
+                          rendered="#{userListBean.getUserListViewModels().size() % 3 != 0}"/>
+        </div>
+        <hr class="my-3"/>
+    </ui:define>
+</ui:composition>
+</html>
