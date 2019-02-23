@@ -43,11 +43,11 @@ public class UserLoginBean {
     public void login() throws IOException {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         if (!this.userService.login(this.userLoginBindingModel.getUsername(), this.userLoginBindingModel.getPassword())) {
-            context.redirect("/faces/jsf/login.xhtml");
+            context.redirect("/login");
             return;
         }
         HttpSession session = (HttpSession) context.getSession(false);
         session.setAttribute("username", this.userLoginBindingModel.getUsername());
-        context.redirect("/faces/jsf/home.xhtml");
+        context.redirect("/home");
     }
 }

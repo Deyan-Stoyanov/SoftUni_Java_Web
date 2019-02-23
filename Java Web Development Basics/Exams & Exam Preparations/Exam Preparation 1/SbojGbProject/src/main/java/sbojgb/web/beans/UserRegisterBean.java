@@ -30,7 +30,7 @@ public class UserRegisterBean {
     }
 
     @PostConstruct
-    private void init(){
+    private void init() {
         this.userRegisterBindingModel = new UserRegisterBindingModel();
     }
 
@@ -46,10 +46,10 @@ public class UserRegisterBean {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         if (this.userService.findByUsername(this.userRegisterBindingModel.getUsername()) != null ||
                 !this.userRegisterBindingModel.getPassword().equals(this.userRegisterBindingModel.getConfirmPassword())) {
-            context.redirect("/faces/jsf/register.xhtml");
+            context.redirect("/register");
             return;
         }
         this.userService.register(this.modelMapper.map(this.userRegisterBindingModel, UserServiceModel.class));
-        context.redirect("/faces/jsf/login.xhtml");
+        context.redirect("/login");
     }
 }

@@ -38,7 +38,7 @@ public class JobApplicationCreateBean {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         this.jobApplicationService
                 .save(this.modelMapper.map(this.jobApplicationCreateBindingModel, JobApplicationServiceModel.class));
-        context.redirect("/faces/jsf/home.xhtml");
+        context.redirect("/home");
     }
 
     public JobApplicationCreateBindingModel getJobApplicationCreateBindingModel() {

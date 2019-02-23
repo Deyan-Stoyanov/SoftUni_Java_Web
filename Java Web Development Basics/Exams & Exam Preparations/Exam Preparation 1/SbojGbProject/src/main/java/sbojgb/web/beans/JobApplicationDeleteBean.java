@@ -39,7 +39,7 @@ public class JobApplicationDeleteBean {
     public void delete(String id) throws IOException {
         this.jobApplicationService.delete(id);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        context.redirect("/faces/jsf/home.xhtml");
+        context.redirect("/home");
     }
 
     public JobApplicationViewModel getJobApplicationViewModel() {
