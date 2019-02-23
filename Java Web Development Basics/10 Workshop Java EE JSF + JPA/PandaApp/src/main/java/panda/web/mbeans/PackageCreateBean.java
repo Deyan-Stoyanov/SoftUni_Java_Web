@@ -49,6 +49,6 @@ public class PackageCreateBean {
         PackageServiceModel packageServiceModel = this.modelMapper.map(this.model, PackageServiceModel.class);
         packageServiceModel.setRecipient(userService.getByUsername(this.model.getRecipient()));
         this.packageService.register(packageServiceModel);
-        context.redirect("/faces/jsf/home.xhtml");
+        context.redirect("/home");
     }
 }

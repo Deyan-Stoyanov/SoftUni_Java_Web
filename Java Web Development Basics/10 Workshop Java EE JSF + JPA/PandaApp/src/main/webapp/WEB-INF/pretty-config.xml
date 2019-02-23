@@ -24,8 +24,9 @@
     </url-mapping>
 
     <url-mapping id="packages-details">
-        <pattern value="/packages/details/#{id}"/>
+        <pattern value="/packages/details"/>
         <view-id value="/faces/jsf/details-package.xhtml"/>
+        <query-param name="id">#{packageDetailsBean.packageDetailsViewModel.id}</query-param>
     </url-mapping>
 
     <url-mapping id="receipts">
@@ -34,8 +35,9 @@
     </url-mapping>
 
     <url-mapping id="receipts-details">
-        <pattern value="/receipts/details#{id}"/>
+        <pattern value="/receipts/details"/>
         <view-id value="/faces/jsf/details-receipt.xhtml"/>
+        <query-param name="id">#{receiptDetailsBean.receipt.id}</query-param>
     </url-mapping>
 
     <url-mapping id="packages-create">

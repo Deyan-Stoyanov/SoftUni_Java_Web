@@ -63,8 +63,8 @@ public class PackageDetailsViewModel {
             Instant instant = deliveryDate.toInstant(ZoneOffset.UTC);
             Date date = Date.from(instant);
             this.deliveryDate = sdf.parse(sdf.format(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            this.deliveryDate = null;
         }
     }
 

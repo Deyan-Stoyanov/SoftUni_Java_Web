@@ -42,14 +42,14 @@ public class UserLoginBean {
     public void userLogin() throws IOException {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         if(!this.userService.login(this.userLoginBindingModel.getUsername(), this.userLoginBindingModel.getPassword())){
-            context.redirect("/faces/jsf/login.xhtml");
+            context.redirect("/login");
             return;
         }
         HttpSession session = (HttpSession) context.getSession(false);
         boolean isAdmin = this.userService.isAdmin(this.modelMapper.map(this.getUserLoginBindingModel(), UserServiceModel.class));
         session.setAttribute("username", this.getUserLoginBindingModel().getUsername());
         session.setAttribute("admin", isAdmin);
-        context.redirect("/faces/jsf/home.xhtml");
+        context.redirect("/home");
     }
 }
 

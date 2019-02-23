@@ -42,20 +42,20 @@ public class PackageManageBean {
         this.packageService.setDeliveryDate(id);
         this.changeStatus(id, Status.SHIPPED);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        context.redirect("/faces/jsf/shipped.xhtml");
+        context.redirect("/packages/shipped");
     }
 
     public void deliver(String id) throws IOException {
         this.changeStatus(id, Status.DELIVERED);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        context.redirect("/faces/jsf/delivered.xhtml");
+        context.redirect("/packages/delivered");
     }
 
     public void acquire(String id) throws IOException {
         this.changeStatus(id, Status.ACQUIRED);
         this.createReceipt(id);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        context.redirect("/faces/jsf/home.xhtml");
+        context.redirect("/home");
     }
 
     private void createReceipt(String id) {
