@@ -14,6 +14,6 @@ public class UserLogoutBean {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         HttpSession session = (HttpSession) context.getSession(false);
         session.invalidate();
-        context.redirect("/faces/view/index.xhtml");
+        context.redirect("/");
     }
 }

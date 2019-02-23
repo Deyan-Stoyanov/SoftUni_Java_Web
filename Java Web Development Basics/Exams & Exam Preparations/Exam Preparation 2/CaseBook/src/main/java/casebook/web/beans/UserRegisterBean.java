@@ -46,11 +46,11 @@ public class UserRegisterBean {
     public void register() throws IOException {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         if (!this.userRegisterBindingModel.getPassword().equals(this.userRegisterBindingModel.getConfirmPassword())) {
-            context.redirect("/faces/view/register.xhtml");
+            context.redirect("/register");
             return;
         }
         this.userRegisterBindingModel.setGender(this.userRegisterBindingModel.getGender().toUpperCase());
         this.userService.register(this.modelMapper.map(this.userRegisterBindingModel, UserServiceModel.class));
-        context.redirect("/faces/view/login.xhtml");
+        context.redirect("/login");
     }
 }

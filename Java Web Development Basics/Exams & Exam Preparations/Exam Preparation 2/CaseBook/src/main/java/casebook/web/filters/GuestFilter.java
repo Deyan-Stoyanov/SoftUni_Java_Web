@@ -6,18 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {
-        "/faces/view/profile.xhtml",
-        "/faces/view/home.xhtml",
-        "/faces/view/friends.xhtml"
-})
+@WebFilter(urlPatterns = {"/user/*", "/home"})
 public class GuestFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         if (req.getSession().getAttribute("username") == null) {
-            resp.sendRedirect("/faces/view/index.xhtml");
+            resp.sendRedirect("/");
             return;
         }
         chain.doFilter(req, resp);

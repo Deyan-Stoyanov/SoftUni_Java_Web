@@ -59,12 +59,12 @@ public class UserListBean {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         UserServiceModel model = this.userService.findByUsername(this.getCurrentUserUsername());
         if (model.getId().equals(id) || model.getFriends().stream().anyMatch(f -> f.getId().equals(id))) {
-            context.redirect("/faces/view/home.xhtml");
+            context.redirect("/home");
             return;
         }
         UserServiceModel friend = this.userService.findById(id);
         this.userService.addFriend(model, friend);
-        context.redirect("/faces/view/friends.xhtml");
+        context.redirect("/friends");
     }
 
     public void removeFriend(String id) throws IOException {
@@ -72,6 +72,6 @@ public class UserListBean {
         UserServiceModel model = this.userService.findByUsername(this.getCurrentUserUsername());
         UserServiceModel friend = this.userService.findById(id);
         this.userService.removeFriend(model, friend);
-        context.redirect("/faces/view/friends.xhtml");
+        context.redirect("/friends");
     }
 }

@@ -21,10 +21,10 @@
                 <ui:repeat value="#{userFriendsListBean.userListViewModels}" var="friend">
                     <div class="row d-flex flex-row col-md-5 mb-3 mx-auto">
                         <h:form>
-                            <h:commandLink action="/view/profile" styleClass="col-md-6 h5 d-inline-block text-center"
+                            <h:link outcome="profile" styleClass="col-md-6 h5 d-inline-block text-center"
                                            value="#{friend.username}">
                                 <f:param name="username" value="#{friend.username}"/>
-                            </h:commandLink>
+                            </h:link>
                             <h:commandButton action="#{userListBean.removeFriend(friend.id)}"
                                              styleClass="text-center btn btn-danger d-inline-block"
                                              value="Unfriend"/>
