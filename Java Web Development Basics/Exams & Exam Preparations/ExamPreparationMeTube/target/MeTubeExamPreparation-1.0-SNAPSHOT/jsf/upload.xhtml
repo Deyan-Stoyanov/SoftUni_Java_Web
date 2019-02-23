@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="templates/base-layout.xhtml">
+    <ui:define name="main-content">
+        <hr class="my-2"/>
+        <div class="text-center mb-3">
+            <h1>Upload</h1>
+        </div>
+        <hr class="my-2"/>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="form-holder text-center">
+                    <h:form styleClass="form-inline">
+                        <fieldset>
+                            <div class="control-group">
+                                <h:outputLabel styleClass="control-label h3 mb-2" for="title" value="Title"/>
+                                <div class="controls">
+                                    <h:inputText id="title" name="title" placeholder="" class="input-xlarge"
+                                                 value="#{tubeUploadBean.tubeCreateBindingModel.name}"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="control-group">
+                                <h:outputLabel styleClass="control-label h3 mb-2" for="author" value="Author"/>
+                                <div class="controls">
+                                    <h:inputText id="author" name="author" placeholder=""
+                                                 styleClass="input-xlarge"
+                                                 value="#{tubeUploadBean.tubeCreateBindingModel.author}"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="control-group">
+                                <h:outputLabel styleClas="control-label h3 mb-2" for="youtube-link"
+                                               value="Youtube Link"/>
+                                <div class="controls">
+                                    <h:inputText id="youtube-link" name="youtube-link" placeholder=""
+                                                 styleClass="input-xlarge"
+                                                 value="#{tubeUploadBean.tubeCreateBindingModel.youtubeId}"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="control-group">
+                                <h:outputLabel styleClas="control-label h3 mb-2" for="description" value="Description"/>
+                                <div class="controls">
+                                    <h:inputTextarea id="description" name="description" placeholder=""
+                                                     styleClass="input-xlarge" style="resize: none;" cols="75"
+                                                     rows="4"
+                                                     value="#{tubeUploadBean.tubeCreateBindingModel.description}"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <h:commandButton styleClass="btn btn-info" value="Upload"
+                                                     action="#{tubeUploadBean.upload}"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <hr class="my-3"/>
+    </ui:define>
+</ui:composition>
+</html>

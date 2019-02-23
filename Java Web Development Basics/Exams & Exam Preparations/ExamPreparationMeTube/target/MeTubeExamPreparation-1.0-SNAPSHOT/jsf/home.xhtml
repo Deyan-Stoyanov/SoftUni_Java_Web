@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="templates/base-layout.xhtml">
+    <ui:define name="main-content">
+        <hr class="my-2"/>
+        <div class="text-center mt-3">
+            <h4 class="h4 text-info">Welcome, #{request.getSession().getAttribute("username")}</h4>
+        </div>
+        <hr class="my-4"/>
+        <div class="container">
+            <div class="row mx-3 my-5">
+                <ui:repeat value="#{tubeListViewBean.tubes}" var="tube">
+                    <div class="box-a col-xs-12 col-sm-4 pull-right text-center">
+                        <h:link outcome="details">
+                            <f:param name="id" value="#{tube.id}"/>
+                            <h:graphicImage value="https://img.youtube.com/vi/#{tube.youtubeId}/mqdefault.jpg"/>
+                        </h:link>
+                        <p class="mt-3">#{tube.name}</p>
+                        <p class="font-italic mt-3">#{tube.author}</p>
+                    </div>
+                </ui:repeat>
+            </div>
+        </div>
+        <hr class="my-3"/>
+    </ui:define>
+</ui:composition>
+
+</html>
