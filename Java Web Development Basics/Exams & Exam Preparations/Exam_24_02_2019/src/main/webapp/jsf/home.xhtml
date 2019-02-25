@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="templates/base-layout.xhtml">
+    <ui:define name="main-content">
+        <h1>Home</h1>
+
+        <hr class="bg-exodia hr-2"/>
+        <div class="print-container container-fluid">
+            <ui:repeat value="#{documentListBean.documentListViewModels}" var="document"
+                       varStatus="status">
+                <h:outputText value="&lt;div class='row mb-4 d-flex flex-row justify-content-between'&gt;"
+                              escape="false"
+                              rendered="#{status.index % 5 == 0}"/>
+                <div class="print-scheduled col-md-2 bg-exodia rounded">
+                    <h5 class="text-center text-white font-weight-bold py-3 mt-3">#{document.title}</h5>
+                    <hr class="bg-white"/>
+                    <div class="buttons-holder w-75 mx-auto d-flex justify-content-between">
+                        <h:link styleClass="btn bg-exodia text-white font-weight-bold mb-3" value="Print"
+                                outcome="print">
+                            <f:param name="id" value="#{document.id}"/>
+                        </h:link>
+                        <h:link styleClass="btn bg-exodia text-white font-weight-bold mb-3" value="Details"
+                                outcome="details">
+                            <f:param name="id" value="#{document.id}"/>
+                        </h:link>
+                    </div>
+                </div>
+                <h:outputText value="&lt;/div&gt;" escape="false" rendered="#{status.index % 5 == 4}"/>
+            </ui:repeat>
+            <c:forEach begin="1" end="#{5 - (documentListBean.getDocumentListViewModels().size() % 5)}">
+                <div class="print-scheduled col-md-2 bg-white rounded"></div>
+            </c:forEach>
+            <h:outputText value="&lt;/div&gt;" escape="false"
+                          rendered="#{documentListBean.getDocumentListViewModels().size() % 5 != 0}"/>
+        </div>
+        <hr class="bg-exodia hr-2 mt-5"/>
+    </ui:define>
+</ui:composition>
+</html>

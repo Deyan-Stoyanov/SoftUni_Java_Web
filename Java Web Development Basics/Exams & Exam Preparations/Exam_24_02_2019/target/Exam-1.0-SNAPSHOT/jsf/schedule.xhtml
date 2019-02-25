@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Lenovo
+  Date: 24.2.2019 г.
+  Time: 09:59
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="templates/base-layout.xhtml">
+    <ui:define name="main-content">
+        <hr class="bg-exodia hr-2"/>
+        <h1 class="text-center text-exodia">Schedule</h1>
+        <hr class="bg-exodia hr-2 w-75"/>
+        <h:form styleClass="mx-auto w-75">
+            <div class="form-group">
+                <div class="label-center d-flex justify-content-center">
+                    <h:outputLabel for="title" styleClass="text-exodia h3" value="Title"/>
+                </div>
+                <h:inputText styleClass="form-control" id="title" placeholder="Title..." name="title"
+                             value="#{documentScheduleBean.documentCreateBindingModel.title}"/>
+            </div>
+            <div class="form-group">
+                <div class="label-center d-flex justify-content-center">
+                    <h:outputLabel for="content" styleClass="text-exodia h3" value="Content"/>
+                </div>
+                <h:inputTextarea styleClass="form-control" id="content" name="content" rows="10"
+                                 placeholder="Content..."
+                                 value="#{documentScheduleBean.documentCreateBindingModel.content}"/>
+            </div>
+            <hr class="bg-exodia hr-2"/>
+            <div class="button-holder d-flex justify-content-center">
+                <h:commandButton styleClass="btn bg-exodia text-white" value="Schedule"
+                                 action="#{documentScheduleBean.scheduleDocument}"/>
+            </div>
+        </h:form>
+        <hr class="bg-exodia hr-2 mt-5"/>
+    </ui:define>
+</ui:composition>
+</html>
