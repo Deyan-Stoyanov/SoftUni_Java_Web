@@ -51,8 +51,8 @@ public class OfferServiceImpl implements OfferService {
         }
         Offer offer = this.findAll()
                 .stream()
-                .filter(o -> o.getApartmentType().toLowerCase().equals(offerFindBindingModel.getFamilyApartmentType().toLowerCase()) &&
-                        o.getApartmentRent().multiply(o.getAgencyCommission().divide(new BigDecimal(100), RoundingMode.CEILING))
+                .filter(o -> o.getApartmentType().equalsIgnoreCase(offerFindBindingModel.getFamilyApartmentType()) &&
+                        o.getApartmentRent().add(o.getApartmentRent().multiply(o.getAgencyCommission().divide(new BigDecimal(100), RoundingMode.CEILING)))
                                 .compareTo(offerFindBindingModel.getFamilyBudget()) < 0)
                 .findFirst()
                 .map(o -> this.modelMapper.map(o, Offer.class))
