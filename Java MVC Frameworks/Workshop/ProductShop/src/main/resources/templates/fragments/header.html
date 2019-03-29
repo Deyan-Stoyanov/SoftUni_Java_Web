@@ -12,6 +12,9 @@
                     <a class="nav-link" sec:authorize="isFullyAuthenticated()" th:href="@{/home}">Home</a>
                     <a class="nav-link" sec:authorize="!isFullyAuthenticated()" th:href="@{/}">Home</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" sec:authorize="isFullyAuthenticated()"  th:href="@{/orders/my}">My Orders</a>
+                </li>
                 <li class="nav-item active" sec:authorize="hasAnyRole('ROOT', 'ADMIN', 'MODERATOR')">
                     <div class="dropdown show">
                         <a class="nav-link active dropdown-toggle" href="#" role="button" id="moderatorDropdown"
@@ -37,6 +40,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="adminDropdown">
                             <a class="dropdown-item" th:href="@{/users/all}">All Users</a>
+                            <a class="dropdown-item" th:href="@{/orders/all}">All Orders</a>
                         </div>
                     </div>
                 </li>
